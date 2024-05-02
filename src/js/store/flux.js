@@ -20,9 +20,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+				fetch('https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts')
+				.then((response) => response.json())
+				.then((data) => setStore({contacts:data.contacts}));
 			},
 			changeColor: (index, color) => {
 				//get the store
@@ -43,3 +43,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
+
+//entender la api, ser capaz de crear usuarios y elementos
+//linkearlo al documento con un fetch
+//pasar ese fetch al actions de flux
+//que el resultado del fetch se vuelque en el demo
+//llamar al demo desde home para ponerlo en el html importando useContext, etc
+//hacer un POST a la API
+//estilos
