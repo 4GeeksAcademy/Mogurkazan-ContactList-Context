@@ -8,3 +8,39 @@
 .items-form {
     width: 500px;
 }
+#app {
+    height: 100vh;
+    background-color: rgb(190, 188, 188);
+}
+.caja {
+    width: 600px;
+    background-color: rgb(190, 188, 188);
+    color: grey;
+    font-family:Arial, Helvetica, sans-serif
+}
+.carta {
+    background-color: white;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2) , 0 7px 1px rgba(0, 0, 0, 0.2);
+    font-size: 30px;
+}
+.entrada {
+    border: 2px solid rgb(199, 196, 196);
+    height: 50px;
+}
+.x {
+    border: none;
+    background-color: white;
+    color: rgb(206, 202, 202);
+}
+.entrada:focus {
+    border:  2px solid rgb(199, 196, 196);
+    outline: none;
+    color: grey;
+}
+.pie {
+    font-size: 15px;
+    border-top: 2px solid rgb(196, 192, 192);
+}
+.cajita {
+    border-top: 2px solid rgb(196, 192, 192);
+}

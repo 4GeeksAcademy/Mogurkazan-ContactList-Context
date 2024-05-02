@@ -11,21 +11,38 @@ export const Home = () => {
 		actions.loadSomeData()
 	},[]);
 	return (
-	<div className="text-center mt-5">
-		<p>{store.demo[1].title}</p>
-		<h2>Lista contactos</h2>
-		 	{store.contacts?.map((contact) => (
-		 		<div key={contact.id}>
-		 			<p>Nombre: {contact.name}</p>
-           			<p>Teléfono: {contact.phone}</p>
-           			<p>Correo electrónico: {contact.email}</p>
-           			<p>Dirección: {contact.address}</p>
-         		</div>
-		 	))}
-		<button>Crear</button>
-		<button>Editar</button>
-		<button>Borrar</button>
-	</div>
+		<div className="caja container d-flex flex-column justify-content-center text-center">
+			<h1>To Do List</h1>
+			<div className="carta card">			
+				<ul className="m-0 p-0" >
+					{store.contacts?.map((contact) => (
+					<div key={contact.id}>
+						<p>Nombre: {contact.name}</p>
+						<p>Teléfono: {contact.phone}</p>
+						<p>Correo electrónico: {contact.email}</p>
+						<p>Dirección: {contact.address}</p>
+					</div>
+					))}
+				</ul>
+				<p className="pie text-start p-2"> items left</p>
+			</div>
+	
+		</div>
+	// <div className="text-center mt-5">
+	// 	<p>{store.demo[1].title}</p>
+	// 	<h2>Lista contactos</h2>
+	// 	 	{store.contacts?.map((contact) => (
+	// 	 		<div key={contact.id}>
+	// 	 			<p>Nombre: {contact.name}</p>
+    //        			<p>Teléfono: {contact.phone}</p>
+    //        			<p>Correo electrónico: {contact.email}</p>
+    //        			<p>Dirección: {contact.address}</p>
+    //      		</div>
+	// 	 	))}
+	// 	<button>Crear</button>
+	// 	<button>Editar</button>
+	// 	<button>Borrar</button>
+	// </div>
 )};
 
 		// FORM//////////////////////////
