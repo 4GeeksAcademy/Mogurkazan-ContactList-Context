@@ -1,15 +1,32 @@
-import React, { useEffect, useState, useContext } from "react";
-import {Context} from '../store/appContext'
+import React, { useContext, useState } from "react";
+import { Context } from '../store/appContext';
 
 import "../../styles/home.css";
 
 export const Home = () => {
-	const {store, actions} = useContext(Context)
-	const [formName, setFormName] = useState({name: ''})
-	useEffect(() =>  {
+	const { store, actions } = useContext(Context);
+	const [editContactId, setEditContactId] = useState(null); // Para almacenar el ID del contacto que se está editando
 
-		actions.loadSomeData()
-	},[]);
+	const handleEdit = (contactId) => {
+		setEditContactId(contactId); // Al presionar el botón "O", establece el ID del contacto que se está editando
+	};
+
+	const handleCancelEdit = () => {
+		setEditContactId(null); // Al cancelar la edición, restablece el ID del contacto a null
+	};
+
+	const handleUpdate = (contactId) => {
+		// Obtiene los datos del contacto que se está editando
+		const updatedContact = {
+			name: document.getElementById(`name-${contactId}`).value,
+			phone: document.getElementById(`phone-${contactId}`).value,
+			email: document.getElementById(`email-${contactId}`).value,
+			address: document.getElementById(`address-${contactId}`).value
+		};
+		actions.updateContact(contactId, updatedContact); // Ejecuta la función para actualizar el contacto
+		setEditContactId(null); // Restablece el ID del contacto a null después de actualizar
+	};
+
 	return (
 		<div className="caja container d-flex flex-column justify-content-center text-center">
 			<h1>Contact List</h1>
@@ -17,44 +34,31 @@ export const Home = () => {
 				<ul className="m-0 p-0" >
 					{store.contacts?.map((contact) => (
 					<div className="p-3" key={contact.id}>
-						<p>Nombre:<strong> {contact.name}</strong></p>
-						<p>Teléfono: {contact.phone}</p>
-						<p>Correo electrónico: {contact.email}</p>
-						<p>Dirección: {contact.address}</p>
-						<button className="x btn-sm  rounded-pill ms-auto text-end" onClick={() => actions.deleteContact(contact.id)}>X</button>
+						{editContactId === contact.id ? (
+							// Muestra campos de entrada para editar los datos del contacto si está en modo edición
+							<>
+								<input type="text" id={`name-${contact.id}`} defaultValue={contact.name} placeholder="Nombre" />
+								<input type="text" id={`phone-${contact.id}`} defaultValue={contact.phone} placeholder="Teléfono" />
+								<input type="email" id={`email-${contact.id}`} defaultValue={contact.email} placeholder="Correo electrónico" />
+								<input type="text" id={`address-${contact.id}`} defaultValue={contact.address} placeholder="Dirección" />
+								<button onClick={() => handleUpdate(contact.id)}>Guardar</button>
+								<button onClick={handleCancelEdit}>Cancelar</button>
+							</>
+						) : (
+							// Muestra los datos del contacto si no está en modo edición
+							<>
+								<p>Name:<strong> {contact.name}</strong></p>
+								<p>Telephone: {contact.phone}</p>
+								<p>Email: {contact.email}</p>
+								<p>Address: {contact.address}</p>
+								<button className="x btn-sm rounded-pill ms-auto text-end" onClick={() => actions.deleteContact(contact.id)}><i class="fa-solid fa-trash"/></button>
+								<button className="x btn-sm rounded-pill ms-auto text-end" onClick={() => handleEdit(contact.id)}><i class="fa-solid fa-pen-to-square"></i></button>
+							</>
+						)}
 					</div>
 					))}
 				</ul>
-				<p className="pie text-start p-2"> items left</p>
 			</div>
-	
 		</div>
-	// <div className="text-center mt-5">
-	// 	<p>{store.demo[1].title}</p>
-	// 	<h2>Lista contactos</h2>
-	// 	 	{store.contacts?.map((contact) => (
-	// 	 		<div key={contact.id}>
-	// 	 			<p>Nombre: {contact.name}</p>
-    //        			<p>Teléfono: {contact.phone}</p>
-    //        			<p>Correo electrónico: {contact.email}</p>
-    //        			<p>Dirección: {contact.address}</p>
-    //      		</div>
-	// 	 	))}
-	// 	<button>Crear</button>
-	// 	<button>Editar</button>
-	// 	<button>Borrar</button>
-	// </div>
-)};
-
-		// FORM//////////////////////////
-		// const [showForm, setShowForm] = useState(false);
-		// const toggleForm = () => {
-		// 	setShowForm(!showForm);
-		// };
-
-		// return (
-		// 	<div>
-		// 		<button onClick={toggleForm}>Mostrar Formulario</button>
-		// 		{showForm && <ContactForm />}
-		// 	</div>
-		// );
+	);
+};

@@ -28,6 +28,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+			updateContact: async (contactId, updatedContactData) => {
+                try {
+                    const response = await fetch(`https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts/${contactId}`, {
+                        method: 'PUT', 
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(updatedContactData) 
+                    });
+                    if (response.ok) {
+                        // Actualizar el contacto en el estado local
+                        const updatedContact = await response.json();
+                        const updatedContacts = getStore().contacts.map(contact => {
+                            if (contact.id === contactId) {
+                                return updatedContact;
+                            } else {
+                                return contact;
+                            }
+                        });
+                        // Actualizar el estado con los contactos actualizados
+                        setStore({ contacts: updatedContacts });
+                    } else {
+                        console.error(`Error: ${response.status} - ${response.statusText}`);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            },
 			loadSomeData: () => {
 				fetch('https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts')
 				.then((response) => response.json())
@@ -76,15 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  console.error('Error:', error);
 				}
 			  },
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-					
+		
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
@@ -105,10 +125,3 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 export default getState;
 
-//entender la api, ser capaz de crear usuarios y elementos
-//linkearlo al documento con un fetch
-//pasar ese fetch al actions de flux
-//que el resultado del fetch se vuelque en el demo
-//llamar al demo desde home para ponerlo en el html importando useContext, etc
-//hacer un POST a la API
-//estilos
