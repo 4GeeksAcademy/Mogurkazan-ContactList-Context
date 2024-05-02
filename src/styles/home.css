@@ -5,6 +5,9 @@
     justify-content: center;
     align-items: center;
 }
+.navegador {
+    background-color: rgb(70, 69, 69);
+}
 .items-form {
     width: 500px;
 }
@@ -21,7 +24,7 @@
 .carta {
     background-color: white;
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2) , 0 7px 1px rgba(0, 0, 0, 0.2);
-    font-size: 30px;
+    font-size: 15px;
 }
 .entrada {
     border: 2px solid rgb(199, 196, 196);

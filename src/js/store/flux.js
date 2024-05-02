@@ -13,7 +13,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			contacto:[]
+			contacts:[
+				{
+					name:"name",
+					phone:"1234",
+					email:"email@email",
+					address:"address"
+					
+				}
+			]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -24,6 +32,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch('https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts')
 				.then((response) => response.json())
 				.then((data) => setStore({contacts:data.contacts}));
+			},
+			addContact: (newContact) => {
+				fetch('https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(newContact)
+				})
+				.then((response) => response.json())
+				.then((data) => {
+					// Aquí manejas la respuesta del servidor si es necesario
+					// Por ejemplo, actualizas el estado con los nuevos datos recibidos
+					setStore({ contacts: data.contacts });
+				})
+				.catch((error) => {
+					// Aquí manejas los errores si la solicitud falla
+					console.error('Error:', error);
+				});
 			},
 			changeColor: (index, color) => {
 				//get the store
