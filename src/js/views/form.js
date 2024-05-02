@@ -48,7 +48,7 @@ export const Form = () => {
                     <input type="text" name="phone" className="form-control" id="tlf" placeholder="00000000" value={formData.phone} onChange={handleChange} required/>
                 </div>
                 <div className="mb-3">
-                    <button className="btn btn-primary" type="submit">Add contact</button>
+                    <button className="btn-12" type="submit">Add contact</button>
                 </div>             
             </form>     
         </div>

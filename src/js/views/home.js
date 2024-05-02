@@ -33,16 +33,16 @@ export const Home = () => {
 			<div className="carta card text-start">			
 				<ul className="m-0 p-0" >
 					{store.contacts?.map((contact) => (
-					<div className="p-3" key={contact.id}>
+					<div className="contacto p-3" key={contact.id}>
 						{editContactId === contact.id ? (
 							// Muestra campos de entrada para editar los datos del contacto si está en modo edición
 							<>
-								<input type="text" id={`name-${contact.id}`} defaultValue={contact.name} placeholder="Nombre" />
-								<input type="text" id={`phone-${contact.id}`} defaultValue={contact.phone} placeholder="Teléfono" />
-								<input type="email" id={`email-${contact.id}`} defaultValue={contact.email} placeholder="Correo electrónico" />
-								<input type="text" id={`address-${contact.id}`} defaultValue={contact.address} placeholder="Dirección" />
-								<button onClick={() => handleUpdate(contact.id)}>Guardar</button>
-								<button onClick={handleCancelEdit}>Cancelar</button>
+								<input className="edit" type="text" id={`name-${contact.id}`} defaultValue={contact.name} placeholder="Nombre" />
+								<input className="edit" type="text" id={`phone-${contact.id}`} defaultValue={contact.phone} placeholder="Teléfono" />
+								<input className="edit" type="email" id={`email-${contact.id}`} defaultValue={contact.email} placeholder="Correo electrónico" />
+								<input className="edit" type="text" id={`address-${contact.id}`} defaultValue={contact.address} placeholder="Dirección" />
+								<button className="edit-button mx-1" onClick={() => handleUpdate(contact.id)}>Save!</button>
+								<button className="edit-button " onClick={handleCancelEdit}>Cancel!</button>
 							</>
 						) : (
 							// Muestra los datos del contacto si no está en modo edición
