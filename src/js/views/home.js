@@ -12,7 +12,7 @@ export const Home = () => {
 	},[]);
 	return (
 		<div className="caja container d-flex flex-column justify-content-center text-center">
-			<h1>To Do List</h1>
+			<h1>Contact List</h1>
 			<div className="carta card text-start">			
 				<ul className="m-0 p-0" >
 					{store.contacts?.map((contact) => (
@@ -21,6 +21,7 @@ export const Home = () => {
 						<p>Teléfono: {contact.phone}</p>
 						<p>Correo electrónico: {contact.email}</p>
 						<p>Dirección: {contact.address}</p>
+						<button className="x btn-sm  rounded-pill ms-auto text-end" onClick={() => actions.deleteContact(contact.id)}>X</button>
 					</div>
 					))}
 				</ul>

@@ -36,12 +36,12 @@ export const Form = () => {
 	<div className="caja-form container-flex  justify-content-center align-items-center"> 
         <form onSubmit={handleSubmit}>
             <div className="items-form mb-3 ">
-                <span className=" input-group-text">First and last name</span>
+                <span className=" input-group-text">Name and Address</span>
                 <input type="text" aria-label="First name" name="name" className="form-control" placeholder="Name" value={formData.name} onChange={handleChange} required/>
                 <input type="text" aria-label="Address" name="address" className="form-control" placeholder="Address" value={formData.address} onChange={handleChange} required/>
             </div>
             <div className="items-form mb-3">
-                <label htmlFor="emailAddress" className="input-group-text">Email address</label>
+                <label htmlFor="emailAddress" className="input-group-text">Email</label>
                 <input type="email" name="email" className="form-control" id="emailAddress" placeholder="name@example.com" value={formData.email} onChange={handleChange} required/>
             </div>  
             <div className="items-form mb-3">

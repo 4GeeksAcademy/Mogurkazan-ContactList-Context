@@ -44,15 +44,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then((response) => response.json())
 				.then((data) => {
-					// Aquí manejas la respuesta del servidor si es necesario
-					// Por ejemplo, actualizas el estado con los nuevos datos recibidos
 					setStore({ contacts: data.contacts });
 				})
 				.catch((error) => {
-					// Aquí manejas los errores si la solicitud falla
 					console.error('Error:', error);
 				});
 			},
+
+			deleteContact: async (contactId) => {
+				try {
+				  const response = await fetch(`https://playground.4geeks.com/contact/agendas/Mogurkazan/contacts/${contactId}`, {
+					method: 'DELETE',
+					headers: {
+					  'Content-Type': 'application/json',
+					},
+				  });
+				  if (response.ok) { // Verifica si la respuesta es exitosa
+					if (response.status === 204) { // Sin contenido
+					  // Si es 204, solo necesitas eliminar el contacto del estado
+					  const updatedContacts = getStore().contacts.filter(contact => contact.id !== contactId);
+					  setStore({ contacts: updatedContacts });
+					} else {
+					  // Si la respuesta tiene contenido, conviértela a JSON
+					  const data = await response.json();
+					  setStore({ contacts: data.contacts });
+					}
+				  } else {
+					console.error(`Error: ${response.status} - ${response.statusText}`);
+				  }
+				} catch (error) {
+				  console.error('Error:', error);
+				}
+			  },
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+					
 			changeColor: (index, color) => {
 				//get the store
 				const store = getStore();
