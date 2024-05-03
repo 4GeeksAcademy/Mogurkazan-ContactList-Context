@@ -93,7 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  const updatedContacts = getStore().contacts.filter(contact => contact.id !== contactId);
 					  setStore({ contacts: updatedContacts });
 					} else {
-					  // Si la respuesta tiene contenido, conviértela a JSON
+					  
 					  const data = await response.json();
 					  setStore({ contacts: data.contacts });
 					}
@@ -116,7 +116,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return elm;
 				});
 
-				//reset the global store
+				
 				setStore({ demo: demo });
 			}
 		}
